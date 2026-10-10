@@ -23,7 +23,7 @@ tr.long td{background:#fff4e6}tr.long td.n b{color:#b5532a}
 </style></head><body><main class="wrap">
 <div class="eyebrow">17–24 октября · Sun Loft 47 · из Фетхие</div>
 <h1>Два маршрута на одной неделе</h1>
-<p class="lead">Линии построены автоматически по береговой линии OpenStreetMap: кратчайший путь по воде с отступом от берега. Это схема для сравнения, а не навигационная прокладка; реальный путь с галсами длиннее на 10–30%. Часы считаны при средних 5 узлах.</p>
+<p class="lead">Линии построены автоматически по береговой линии OpenStreetMap: кратчайший путь по воде с отступом от берега. Это схема для сравнения, а не навигационная прокладка; реальный путь с галсами длиннее на 10–30%. Часы считаны при средних 5 узлах. Обе карты в одном масштабе и двигаются вместе.</p>
 <div class="grid">
  <section class="card" id="c-gocek"><h2>Залив Фетхие и Гёджек</h2><p class="sub">Текущий план лендинга. Все ночи в маринах, закрытая вода.</p><div class="kpis"></div><div class="map" id="m-gocek"></div><table></table></section>
  <section class="card" id="c-kas"><h2>Каш и Кекова</h2><p class="sub" id="kas-sub"></p>
@@ -62,9 +62,15 @@ function draw(cardId,mapId,key){
   });
   stops.forEach(s=>{const p=DATA.points[s];
     L.circleMarker(p,{radius:MARINA[s]?6:4.5,color:'#fff',weight:2,fillColor:MARINA[s]?'#165e68':'#20322e',fillOpacity:1}).bindTooltip(NAMES[s],{permanent:true,direction:'right',offset:[6,0],className:'lbl'}).addTo(layer);bounds.push(p);});
-  map.fitBounds(bounds,{padding:[20,20]});
   card.querySelector('table').innerHTML='<tr><th>День</th><th>Переход</th><th class="n">NM</th><th class="n">Ход</th></tr>'+days.map((d,i)=>`<tr class="${d.nm>25?'long':''}"><td><span class="sw" style="background:${COLORS[i]}"></span>${d.day}</td><td>${d.stops.length>1?d.stops.map(s=>NAMES[s]).join(' → '):NAMES[d.stops[0]]+', бухты рядом'}</td><td class="n"><b>${d.nm??d.label}</b></td><td class="n">${hrs(d.nm)}</td></tr>`).join('');
 }
 draw('c-gocek','m-gocek','gocek');draw('c-kas','m-kas','kas_orig');
+// одинаковый масштаб: обе карты показывают общий охват всех маршрутов и двигаются синхронно
+const ALL=Object.values(DATA.routes).flat().flatMap(d=>d.path);
+const ms=[maps['m-gocek'].map,maps['m-kas'].map];
+ms.forEach(m=>m.fitBounds(ALL,{padding:[16,16]}));
+const z=Math.min(...ms.map(m=>m.getZoom()));ms.forEach(m=>m.setView(ms[0].getCenter(),z,{animate:false}));
+let syncing=false;
+ms.forEach((m,i)=>m.on('move zoom',()=>{if(syncing)return;syncing=true;ms[1-i].setView(m.getCenter(),m.getZoom(),{animate:false});syncing=false;}));
 document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',x===b));draw('c-kas','m-kas',b.dataset.v);});
 </script></body></html>

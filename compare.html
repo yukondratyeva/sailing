@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Сравнение маршрутов · Фетхие</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+<style>
+:root{--ink:#20322e;--sea:#165e68;--sand:#f5f1e9;--line:#dddcd2;--muted:#6b756e;--warn:#c18a47}
+*{box-sizing:border-box}body{margin:0;background:var(--sand);font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink)}
+.wrap{max-width:1240px;margin:auto;padding:34px 24px 50px}a{color:var(--sea)}
+.eyebrow{color:var(--sea);font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+h1{font-size:clamp(30px,4.5vw,48px);letter-spacing:-.04em;margin:8px 0 10px}.lead{color:var(--muted);font-size:16px;line-height:1.55;max-width:760px;margin:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:28px}.grid>*{min-width:0}
+.card{background:#fff;border-radius:18px;padding:20px;border:1px solid var(--line)}
+.card h2{font-size:24px;letter-spacing:-.03em;margin:0 0 4px}.sub{font-size:13px;color:var(--muted);margin:0 0 14px;line-height:1.5}
+.kpis{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.kpi{background:var(--sand);border-radius:12px;padding:9px 12px;font-size:12px;color:var(--muted);line-height:1.3}.kpi b{display:block;font-size:20px;color:var(--ink)}.kpi.bad b{color:#b5532a}
+.map{height:430px;border-radius:14px;border:1px solid var(--line);z-index:0;background:#dce7e2}
+.seg{display:inline-flex;background:var(--sand);border-radius:30px;padding:3px;margin-bottom:12px}.seg button{border:0;background:none;padding:7px 13px;border-radius:30px;font:600 13px system-ui,sans-serif;color:var(--muted);cursor:pointer}.seg button[aria-pressed=true]{background:#fff;color:var(--sea);box-shadow:0 1px 3px #0002}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px}td,th{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em}td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}th.n{text-align:right}
+tr.long td{background:#fff4e6}tr.long td.n b{color:#b5532a}
+.sw{display:inline-block;width:18px;height:4px;border-radius:2px;vertical-align:middle;margin-right:7px}
+.note{font-size:12px;color:var(--muted);line-height:1.55;margin:12px 0 0}
+.lbl{background:#fff;border:0;box-shadow:0 1px 3px #0003;border-radius:6px;padding:2px 6px;font:600 11px system-ui,sans-serif;color:var(--ink)}.lbl:before{display:none}
+.foot{margin-top:26px;font-size:13px;color:var(--muted);line-height:1.6;max-width:900px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}.map{height:340px}.wrap{padding:24px 16px 40px}}
+</style></head><body><main class="wrap">
+<div class="eyebrow">17–24 октября · Sun Loft 47 · из Фетхие</div>
+<h1>Два маршрута на одной неделе</h1>
+<p class="lead">Линии построены автоматически по береговой линии OpenStreetMap: кратчайший путь по воде с отступом от берега. Это схема для сравнения, а не навигационная прокладка; реальный путь с галсами длиннее на 10–30%. Часы считаны при средних 5 узлах.</p>
+<div class="grid">
+ <section class="card" id="c-gocek"><h2>Залив Фетхие и Гёджек</h2><p class="sub">Текущий план лендинга. Все ночи в маринах, закрытая вода.</p><div class="kpis"></div><div class="map" id="m-gocek"></div><table></table></section>
+ <section class="card" id="c-kas"><h2>Каш и Кекова</h2><p class="sub" id="kas-sub"></p>
+  <div class="seg" role="group" aria-label="Вариант маршрута"><button data-v="kas_orig" aria-pressed="true">Твой вариант</button><button data-v="kas" aria-pressed="false">Гибрид с Кековой</button></div>
+  <div class="kpis"></div><div class="map" id="m-kas"></div><table></table></section>
+</div>
+<p class="foot">Подсвечены дни длиннее 25 NM (больше 5 часов хода). В октябре днём обычно дует с запада и северо-запада, поэтому переходы на запад (обратно к Фетхие) чаще идут против ветра. Кекова как радиальный выход из Каша: около 42 NM туда и обратно, поэтому в твоём варианте среда оставлена под бухты рядом с Кашем. <a href="./">← к лендингу</a></p>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+const DATA={"routes":{"gocek":[{"day":"Вс 18","stops":["Fethiye","Gemiler","Fethiye"],"nm":28,"path":[[36.6232,29.1005],[36.644,29.1031],[36.648,29.0783],[36.616,29.0335],[36.584,29.0186],[36.544,29.0037],[36.536,29.0286],[36.536,29.0584],[36.552,29.0584],[36.556,29.0633],[36.5549,29.0666],[36.556,29.0633],[36.54,29.0584],[36.536,29.0584],[36.536,29.0186],[36.544,29.0037],[36.608,29.0286],[36.624,29.0435],[36.648,29.0783],[36.644,29.1031],[36.6232,29.1005]]},{"day":"Пн 19","stops":["Fethiye","Oludeniz","Butterfly","Fethiye"],"nm":35,"path":[[36.6232,29.1005],[36.644,29.1031],[36.648,29.0783],[36.616,29.0335],[36.584,29.0186],[36.544,29.0037],[36.536,29.0286],[36.54,29.1081],[36.545,29.113],[36.5,29.118],[36.4978,29.1255],[36.544,29.0037],[36.608,29.0286],[36.624,29.0435],[36.648,29.0783],[36.644,29.1031],[36.6232,29.1005]]},{"day":"Вт 20","stops":["Fethiye","Kizilada","Gocek"],"nm":12,"path":[[36.6232,29.1005],[36.644,29.1031],[36.652,29.0385],[36.6546,29.0428],[36.744,28.9391],[36.747,28.94]]},{"day":"Ср 21","stops":["Gocek","Hamam","Tersane","Gocek"],"nm":16,"path":[[36.747,28.94],[36.652,28.8696],[36.6455,28.86],[36.672,28.8894],[36.672,28.9044],[36.6655,28.9105],[36.68,28.9044],[36.747,28.94]]},{"day":"Чт 22","stops":["Gocek","Yassica","Domuz","Gocek"],"nm":12,"path":[[36.747,28.94],[36.708,28.9242],[36.7015,28.933],[36.7,28.9193],[36.672,28.9044],[36.668,28.9093],[36.657,28.9087],[36.68,28.9093],[36.747,28.94]]},{"day":"Пт 23","stops":["Gocek","Fethiye"],"nm":12,"path":[[36.747,28.94],[36.716,28.9689],[36.68,29.0534],[36.644,29.0981],[36.644,29.1031],[36.6232,29.1005]]}],"kas":[{"day":"Вс 18","stops":["Fethiye","Gemiler"],"nm":14,"path":[[36.6232,29.1005],[36.644,29.1031],[36.648,29.0783],[36.616,29.0335],[36.584,29.0186],[36.544,29.0037],[36.536,29.0286],[36.536,29.0584],[36.552,29.0584],[36.556,29.0633],[36.5549,29.0666]]},{"day":"Пн 19","stops":["Gemiler","Kalkan"],"nm":30,"path":[[36.5549,29.0666],[36.556,29.0783],[36.388,29.0981],[36.34,29.1627],[36.244,29.3168],[36.228,29.3565],[36.2592,29.413]]},{"day":"Вт 20","stops":["Kalkan","Kekova"],"nm":33,"path":[[36.2592,29.413],[36.24,29.4012],[36.224,29.4112],[36.208,29.446],[36.164,29.6099],[36.156,29.6199],[36.156,29.6348],[36.132,29.6795],[36.128,29.6894],[36.12,29.7391],[36.164,29.8783],[36.188,29.913],[36.196,29.918],[36.2,29.913],[36.1835,29.86]]},{"day":"Ср 21","stops":["Kekova","Kas"],"nm":21,"path":[[36.1835,29.86],[36.2,29.913],[36.196,29.918],[36.188,29.913],[36.164,29.8783],[36.12,29.7391],[36.128,29.6845],[36.148,29.6497],[36.168,29.6298],[36.1985,29.628]]},{"day":"Чт 22","stops":["Kas","Kalkan"],"nm":14,"path":[[36.1985,29.628],[36.184,29.605],[36.18,29.5901],[36.208,29.441],[36.224,29.4112],[36.24,29.4012],[36.2592,29.413]]},{"day":"Пт 23","stops":["Kalkan","Fethiye"],"nm":40,"path":[[36.2592,29.413],[36.228,29.3565],[36.272,29.2522],[36.388,29.0981],[36.544,29.0037],[36.608,29.0286],[36.624,29.0435],[36.648,29.0783],[36.644,29.1031],[36.6232,29.1005]]}],"kas_orig":[{"day":"Вс 18","stops":["Fethiye","Gemiler"],"nm":14,"path":[[36.6232,29.1005],[36.644,29.1031],[36.648,29.0783],[36.616,29.0335],[36.584,29.0186],[36.544,29.0037],[36.536,29.0286],[36.536,29.0584],[36.552,29.0584],[36.556,29.0633],[36.5549,29.0666]]},{"day":"Пн 19","stops":["Gemiler","Kalkan"],"nm":30,"path":[[36.5549,29.0666],[36.556,29.0783],[36.388,29.0981],[36.34,29.1627],[36.244,29.3168],[36.228,29.3565],[36.2592,29.413]]},{"day":"Вт 20","stops":["Kalkan","Kas"],"nm":14,"path":[[36.2592,29.413],[36.24,29.4012],[36.224,29.4112],[36.208,29.446],[36.18,29.5901],[36.192,29.6248],[36.1985,29.628]]},{"day":"Ср 21","stops":["Kas"],"nm":null,"path":[],"label":"0–5"},{"day":"Чт 22","stops":["Kas","Gemiler"],"nm":40,"path":[[36.1985,29.628],[36.184,29.605],[36.18,29.5901],[36.208,29.441],[36.228,29.3665],[36.228,29.3515],[36.248,29.3068],[36.368,29.123],[36.388,29.0981],[36.556,29.0783],[36.5549,29.0666]]},{"day":"Пт 23","stops":["Gemiler","Fethiye"],"nm":14,"path":[[36.5549,29.0666],[36.556,29.0633],[36.54,29.0584],[36.536,29.0584],[36.536,29.0186],[36.544,29.0037],[36.608,29.0286],[36.624,29.0435],[36.648,29.0783],[36.644,29.1031],[36.6232,29.1005]]}]},"points":{"Fethiye":[36.6232,29.1005],"Gemiler":[36.5545,29.0665],"Oludeniz":[36.545,29.113],"Butterfly":[36.4978,29.1255],"Kizilada":[36.6545,29.043],"Gocek":[36.747,28.94],"Hamam":[36.6455,28.86],"Tersane":[36.6655,28.9145],"Yassica":[36.7015,28.933],"Domuz":[36.657,28.906],"Kalkan":[36.2592,29.413],"Kas":[36.1985,29.628],"Kekova":[36.1835,29.86]}};
+const NAMES={Fethiye:'Фетхие',Gemiler:'Gemiler',Oludeniz:'Ölüdeniz',Butterfly:'Долина бабочек',Kizilada:'Kızılada',Gocek:'Göcek',Hamam:'Hamam Bay',Tersane:'Tersane',Yassica:'Yassıca',Domuz:'Domuz',Kalkan:'Kalkan',Kas:'Kaş',Kekova:'Kekova'};
+const MARINA={Fethiye:1,Gocek:1,Kalkan:1,Kas:1};
+const COLORS=['#2a78d6','#eb6834','#1baf7a','#eda100','#e87ba4','#008300'];
+const META={gocek:{nights:'5 из 5',sub:''},kas_orig:{nights:'3 из 5',sub:'Ночёвки в Gemiler (якорь) 18 и 22 октября, Kalkan 19, Kaş 20–21.'},kas:{nights:'3 из 5',sub:'Ночёвки Gemiler (якорь) 18, Kalkan 19, Kekova (якорь или понтон) 20, Kaş 21, Kalkan 22.'}};
+
+const hrs=nm=>nm==null?'':'≈ '+(Math.round(nm/5*2)/2).toString().replace('.',',')+' ч';
+const tile=()=>L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:15,attribution:'© OpenStreetMap'});
+const maps={};
+function draw(cardId,mapId,key){
+  const card=document.getElementById(cardId),days=DATA.routes[key];
+  if(!maps[mapId]){maps[mapId]={map:L.map(mapId,{scrollWheelZoom:false}).addLayer(tile()),layer:L.layerGroup()};maps[mapId].layer.addTo(maps[mapId].map);}
+  const {map,layer}=maps[mapId];layer.clearLayers();
+  const total=days.reduce((s,d)=>s+(d.nm||0),0),longest=days.reduce((a,d)=>(d.nm||0)>(a.nm||0)?d:a);
+  const long=days.filter(d=>d.nm>25).length;
+  card.querySelector('.kpis').innerHTML=`<div class="kpi"><b>${total} NM</b>за неделю</div><div class="kpi ${longest.nm>30?'bad':''}"><b>${longest.nm} NM</b>самый длинный день (${longest.day})</div><div class="kpi ${long>1?'bad':''}"><b>${long}</b>дней длиннее 25 NM</div><div class="kpi"><b>${META[key].nights}</b>ночей в марине</div>`;
+  if(key!=='gocek')document.getElementById('kas-sub').textContent=META[key].sub;
+  const bounds=[],stops=new Set();
+  days.forEach((d,i)=>{
+    if(d.path.length){
+      L.polyline(d.path,{color:'#fff',weight:6,opacity:.9}).addTo(layer);
+      L.polyline(d.path,{color:COLORS[i],weight:3,opacity:1}).bindTooltip(`${d.day}: ${d.stops.map(s=>NAMES[s]).join(' → ')} · ${d.nm} NM ${hrs(d.nm)}`,{sticky:true}).addTo(layer);
+      bounds.push(...d.path);
+    }
+    d.stops.forEach(s=>stops.add(s));
+  });
+  stops.forEach(s=>{const p=DATA.points[s];
+    L.circleMarker(p,{radius:MARINA[s]?6:4.5,color:'#fff',weight:2,fillColor:MARINA[s]?'#165e68':'#20322e',fillOpacity:1}).bindTooltip(NAMES[s],{permanent:true,direction:'right',offset:[6,0],className:'lbl'}).addTo(layer);bounds.push(p);});
+  map.fitBounds(bounds,{padding:[20,20]});
+  card.querySelector('table').innerHTML='<tr><th>День</th><th>Переход</th><th class="n">NM</th><th class="n">Ход</th></tr>'+days.map((d,i)=>`<tr class="${d.nm>25?'long':''}"><td><span class="sw" style="background:${COLORS[i]}"></span>${d.day}</td><td>${d.stops.length>1?d.stops.map(s=>NAMES[s]).join(' → '):NAMES[d.stops[0]]+', бухты рядом'}</td><td class="n"><b>${d.nm??d.label}</b></td><td class="n">${hrs(d.nm)}</td></tr>`).join('');
+}
+draw('c-gocek','m-gocek','gocek');draw('c-kas','m-kas','kas_orig');
+document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',x===b));draw('c-kas','m-kas',b.dataset.v);});
+</script></body></html>

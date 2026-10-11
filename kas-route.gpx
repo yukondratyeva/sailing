@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="yukondratyeva.github.io/sailing" xmlns="http://www.topografix.com/GPX/1/1">
+<metadata><name>Фетхие, Калкан, Каш · 17–24 октября 2026</name><desc>Только путевые точки: прокладку строить по карте с учётом берега и погоды.</desc></metadata>
+<wpt lat="36.62296" lon="29.10134"><name>01 Фетхие · Ece Saray Marina</name><desc>17, 23 окт. · Чартерная база. Ночёвки 17 и 23 октября.</desc><sym>Marina</sym></wpt>
+<wpt lat="36.5549" lon="29.0666"><name>02 Gemiler Island</name><desc>18, 22 окт. · Якорь с кормовым на берег. Ночёвки 18 и 22 октября.</desc><sym>Anchor</sym></wpt>
+<wpt lat="36.4977" lon="29.1255"><name>03 Butterfly Valley</name><desc>19 окт. · Купание с яхты, без высадки.</desc><sym>Waypoint</sym></wpt>
+<wpt lat="36.2716" lon="29.2896"><name>04 Patara</name><desc>19, 22 окт. · Открытый пляж, проходим мимо.</desc><sym>Waypoint</sym></wpt>
+<wpt lat="36.262" lon="29.414"><name>05 Kalkan</name><desc>19 окт. · Городская гавань, швартовка кормой. Ночёвка 19 октября.</desc><sym>Marina</sym></wpt>
+<wpt lat="36.2262" lon="29.4505"><name>06 Kaputaş и Голубая пещера</name><desc>20 окт. · Купание, пещера в штиль.</desc><sym>Waypoint</sym></wpt>
+<wpt lat="36.2038" lon="29.6313"><name>07 Kaş · Setur Marina</name><desc>20–21 окт. · Ночёвки 20 и 21 октября.</desc><sym>Marina</sym></wpt>
+<wpt lat="36.174" lon="29.6495"><name>08 Limanağzı</name><desc>21 окт. · Бухты и снорклинг.</desc><sym>Waypoint</sym></wpt>
+<wpt lat="36.1903" lon="29.8616"><name>09 Kekova и Kaleköy (на экскурсионной лодке)</name><desc>21 окт. · Вариант B: не на своей яхте.</desc><sym>Waypoint</sym></wpt>
+</gpx>
